@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>사용자 정보 입력</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        input, select {
+            display: block;
+            margin-bottom: 10px;
+            padding: 5px;
+            width: 100%;
+            max-width: 300px;
+        }
+        button, a {
+            display: inline-block;
+            text-align: center;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            width: auto;
+        }
+        button:hover, a:hover {
+            background-color: #0056b3;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>사용자 정보</h1>
+    <div class="input-form">
+        <h2>정보 입력</h2>
+        <form id="userForm">
+            <!-- 이름 입력 -->
+            <input type="text" id="name" placeholder="이름을 입력하세요" required>
+            <button type="button" id="submitName">제출</button>
+
+            <!-- 추가 정보 입력 (기본적으로 숨김 처리) -->
+            <div id="additionalInputs" class="hidden">
+                <label for="gender">성별 선택</label>
+                <select id="gender" required>
+                    <option value="">성별을 선택하세요</option>
+                    <option value="남성">남성</option>
+                    <option value="여성">여성</option>
+                </select>
+                <input type="number" id="age" placeholder="나이를 입력하세요">
+                <input type="number" id="height" placeholder="키를 입력하세요 (cm)">
+                <input type="number" id="weight" placeholder="몸무게를 입력하세요 (kg)">
+                <input type="number" id="bodyFat" placeholder="체지방률을 입력하세요 (%)">
+                <input type="number" id="waist" placeholder="허리둘레를 입력하세요 (cm)">
+                <button type="button" id="submitAll">모두 제출</button>
+            </div>
+        </form>
+        <div class="result" id="result"></div>
+        <!-- 추가된 "내 경로 확인" 버튼 -->
+        <a href="file:///C:/Users/%EC%A7%80%EB%82%98/Desktop/%EC%83%88%20%ED%85%8D%EC%8A%A4%ED%8A%B8%20%EB%AC%B8%EC%84%9C%20(3)-1.html" target="_blank">
+            내 경로 확인
+        </a>
+    </div>
+
+    <script>
+        // 첫 번째 입력 (이름) 처리
+        document.getElementById('submitName').addEventListener('click', function () {
+            const name = document.getElementById('name').value;
+            const resultDiv = document.getElementById('result');
+            if (name) {
+                resultDiv.textContent = `안녕하세요, ${name}님! 다음 정보를 입력해주세요.`;
+                document.getElementById('additionalInputs').classList.remove('hidden');
+            } else {
+                resultDiv.textContent = "이름을 입력해주세요.";
+            }
+        });
+
+        // 모든 정보 제출 처리
+        document.getElementById('submitAll').addEventListener('click', function () {
+            const name = document.getElementById('name').value;
+            const gender = document.getElementById('gender').value;
+            const age = document.getElementById('age').value;
+            const height = document.getElementById('height').value;
+            const weight = document.getElementById('weight').value;
+            const bodyFat = document.getElementById('bodyFat').value;
+            const waist = document.getElementById('waist').value;
+
+            const resultDiv = document.getElementById('result');
+
+            if (name && gender && age && height && weight && bodyFat && waist) {
+                resultDiv.textContent = `감사합니다, ${name}님! 입력된 정보:
+                - 성별: ${gender}
+                - 나이: ${age}세
+                - 키: ${height}cm
+                - 몸무게: ${weight}kg
+                - 체지방률: ${bodyFat}%
+                - 허리둘레: ${waist}cm`;
+            } else {
+                resultDiv.textContent = "모든 정보를 입력해주세요.";
+            }
+        });
+    </script>
+</body>
+</html>
+
